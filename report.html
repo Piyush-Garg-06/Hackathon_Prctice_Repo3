@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Reports</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
+  <script>
+    (function(){
+      emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
+    })();
+  </script>
+  <style>
+    :root {
+      --primary: #4A90E2;
+      --secondary: #8E2DE2;
+      --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+      --bg: #f7f8fc;
+      --card-bg: #fff;
+      --text: #333;
+      --shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    *{margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",sans-serif;}
+    body{background:var(--bg);color:var(--text);}
+    
+    .navbar{background:var(--gradient);padding:1rem 3rem;display:flex;justify-content:space-between;align-items:center;color:#fff;}
+    .navbar h1{font-size:1.4rem;}
+    .nav-links{display:flex;gap:1.5rem;}
+    .nav-links a{color:#fff;text-decoration:none;font-weight:500;}
+    .nav-links a:hover{opacity:.8;}
+
+    .container{padding:2rem;display:flex;justify-content:center;align-items:center;min-height:80vh;}
+    
+    .card{
+      background:var(--card-bg);
+      border-radius:20px;
+      padding:2rem;
+      box-shadow:var(--shadow);
+      text-align:center;
+      max-width:500px;
+      width:100%;
+    }
+
+    .card h2{color:var(--primary);margin-bottom:1.5rem;}
+
+    /* Circle Chart */
+    .circle-chart{max-width:260px;margin:auto;position:relative;}
+    .circle-chart canvas{width:100% !important;height:auto !important;}
+    .center-text{
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      font-size:1.6rem;
+      font-weight:700;
+      color:var(--primary);
+    }
+
+    /* Progress Bars */
+    .progress-section{margin-top:2rem;text-align:left;}
+    .progress-label{font-size:1rem;font-weight:600;margin-bottom:.3rem;}
+    .progress-bar{
+      width:100%;
+      background:#e0e0e0;
+      border-radius:10px;
+      overflow:hidden;
+      margin-bottom:1.2rem;
+    }
+    .progress-fill{
+      height:14px;
+      border-radius:10px;
+      transition:width 1s ease;
+    }
+    .academic{background:var(--primary);}
+    .activities{background:var(--secondary);}
+
+    .warning{color:red;font-weight:600;margin-top:1rem;text-align:center;}
+
+    footer{margin-top:2rem;text-align:center;padding:1rem;background:var(--gradient);color:#fff;}
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <h1>Student Performance</h1>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Dashboard</a>
+      <a href="#">Attendance</a>
+      <a href="#">Results</a>
+      <a href="#">Reports</a>
+    </div>
+  </nav>
+
+  <!-- Reports -->
+  <div class="container">
+    <div class="card">
+      <h2>Overall Performance</h2>
+      <div class="circle-chart">
+        <canvas id="performanceChart"></canvas>
+        <div class="center-text" id="percentText"></div>
+      </div>
+
+      <!-- Academic + Other Activities with Progress Bars -->
+      <div class="progress-section">
+        <div>
+          <p class="progress-label">📘 Academic Performance (<span id="academicText"></span>)</p>
+          <div class="progress-bar"><div id="academicBar" class="progress-fill academic"></div></div>
+        </div>
+        <div>
+          <p class="progress-label">🎭 Other Activities (<span id="activityText"></span>)</p>
+          <div class="progress-bar"><div id="activityBar" class="progress-fill activities"></div></div>
+        </div>
+      </div>
+
+      <p id="warningMsg" class="warning"></p>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Student Performance System | Designed by Nitin</p>
+  </footer>
+
+  <script>
+    // Example Data
+    const academic = 65;   // Academic %
+    const activities = 45; // Activities %
+    const overall = Math.round((academic + activities)/2);
+
+    // Show text values
+    document.getElementById("percentText").innerText = overall + "%";
+    document.getElementById("academicText").innerText = academic + "%";
+    document.getElementById("activityText").innerText = activities + "%";
+
+    // Animate progress bars
+    document.getElementById("academicBar").style.width = academic + "%";
+    document.getElementById("activityBar").style.width = activities + "%";
+
+    // Circle Chart
+    new Chart(document.getElementById("performanceChart"), {
+      type: "doughnut",
+      data: {
+        labels: ["Performance", "Remaining"],
+        datasets: [{
+          data: [overall, 100-overall],
+          backgroundColor: ["#4A90E2","#e0e0e0"],
+          cutout: "75%"
+        }]
+      },
+      options: {responsive:true,plugins:{legend:{display:false}}}
+    });
+
+    // Warning + Email if below 50%
+    const warningMsg = document.getElementById("warningMsg");
+    if(overall < 50){
+      warningMsg.innerText = "⚠️ Overall Performance below 50%! Email sent to Parents.";
+
+      emailjs.send("YOUR_SERVICE_ID","YOUR_TEMPLATE_ID",{
+        student_name:"Nitin",
+        parent_email:"parent@gmail.com",
+        overall_score: overall
+      }).then(()=>console.log("Email sent"))
+        .catch(err=>console.log("Email failed:",err));
+    }
+  </script>
+
+</body>
+</html>

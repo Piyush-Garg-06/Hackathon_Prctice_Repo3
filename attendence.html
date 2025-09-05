@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Attendance</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #4A90E2;
+      --secondary-color: #8E2DE2;
+      --gradient: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+      --bg-light: #f5f6fa;
+      --text-dark: #333;
+      --card-bg: #fff;
+      --shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body { background: var(--bg-light); color: var(--text-dark); }
+
+    /* Navbar */
+    .navbar {
+      background: var(--gradient);
+      padding: 1rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+    .navbar h1 { font-size: 1.5rem; font-weight: 700; }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: 0.3s; }
+    .nav-links a:hover { opacity: 0.7; }
+
+    /* Container */
+    .container { padding: 2rem; }
+
+    h2 { margin-bottom: 1rem; font-size: 1.8rem; color: var(--primary-color); }
+
+    /* Subject Attendance Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card-bg);
+      box-shadow: var(--shadow);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+    th, td { padding: 1rem; text-align: center; border-bottom: 1px solid #ddd; }
+    th { background: var(--gradient); color: #fff; }
+    tr:nth-child(even) { background: #f9f9f9; }
+
+    .low-attendance { color: red; font-weight: 600; }
+    .good-attendance { color: green; font-weight: 600; }
+
+    /* Chart Card */
+    .chart-card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 15px;
+      box-shadow: var(--shadow);
+      max-width: 700px;
+      margin: auto;
+    }
+    .chart-card h3 { text-align: center; margin-bottom: 1rem; color: var(--primary-color); }
+
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      padding: 1rem;
+      background: var(--gradient);
+      color: #fff;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <h1>Student Performance</h1>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Dashboard</a>
+      <a href="#">Attendance</a>
+      <a href="#">Results</a>
+      <a href="#">Reports</a>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <div class="container">
+    <h2>My Subject-wise Attendance</h2>
+    <table>
+      <tr>
+        <th>Subject</th>
+        <th>Total Classes</th>
+        <th>Attended</th>
+        <th>Percentage</th>
+      </tr>
+      <tr>
+        <td>Mathematics</td>
+        <td>40</td>
+        <td>36</td>
+        <td class="good-attendance">90%</td>
+      </tr>
+      <tr>
+        <td>Science</td>
+        <td>38</td>
+        <td>28</td>
+        <td class="low-attendance">73%</td>
+      </tr>
+      <tr>
+        <td>English</td>
+        <td>42</td>
+        <td>38</td>
+        <td class="good-attendance">90%</td>
+      </tr>
+      <tr>
+        <td>Computer</td>
+        <td>35</td>
+        <td>30</td>
+        <td class="good-attendance">86%</td>
+      </tr>
+    </table>
+
+    <div class="chart-card">
+      <h3>Attendance Chart (Subject-wise %)</h3>
+      <canvas id="attendanceChart"></canvas>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Student Performance System | Designed with ❤️ by Nitin</p>
+  </footer>
+
+  <!-- Chart.js Script -->
+  <script>
+    const ctx = document.getElementById('attendanceChart');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Mathematics', 'Science', 'English', 'Computer'],
+        datasets: [{
+          label: 'Attendance %',
+          data: [90, 73, 90, 86], // Subject wise percentage
+          backgroundColor: ['#4A90E2', '#8E2DE2', '#4A90E2', '#8E2DE2'],
+          borderRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true, max: 100 }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
