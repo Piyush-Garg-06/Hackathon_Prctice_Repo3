@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home | Student Performance</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #4A90E2;
+      --secondary-color: #8E2DE2;
+      --gradient: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+      --bg-light: #f5f6fa;
+      --text-dark: #333;
+      --card-bg: #fff;
+      --shadow: 0 5px 20px rgba(0,0,0,0.1);
+      --radius: 15px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: var(--bg-light);
+      color: var(--text-dark);
+    }
+
+    /* Navbar */
+    .navbar {
+      background: var(--gradient);
+      padding: 1rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .navbar h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      opacity: 0.7;
+    }
+
+    /* Home Section */
+    .home {
+      padding: 3rem 8%;
+      text-align: center;
+    }
+
+    .home h2 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+
+    .home p {
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 2rem;
+    }
+
+    /* Cards Section */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      margin-bottom: 0.8rem;
+      color: var(--primary-color);
+      font-size: 1.4rem;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 1rem;
+      background: var(--gradient);
+      color: #fff;
+      padding: 0.7rem 1.5rem;
+      border-radius: 30px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      padding: 1rem;
+      background: var(--gradient);
+      color: #fff;
+      border-top-left-radius: var(--radius);
+      border-top-right-radius: var(--radius);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <h1>Student Performance</h1>
+    <div class="nav-links">
+      <a href="home.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="#">Attendance</a>
+      <a href="#">Results</a>
+      <a href="#">Reports</a>
+      <a href="#">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Home Content -->
+  <section class="home">
+    <h2>Welcome to Student Performance Portal 🎓</h2>
+    <p>Track your academic journey, attendance records, and activity participation in one simple dashboard.</p>
+
+    <!-- Feature Cards -->
+    <div class="cards">
+      <div class="card">
+        <h3>📊 Academic Progress</h3>
+        <p>Check your MTT1, MTT2, and RTU exam results all in one place.</p>
+        <a href="dashboard.html" class="btn">View Dashboard</a>
+      </div>
+      <div class="card">
+        <h3>🕒 Attendance</h3>
+        <p>Monitor subject-wise attendance to avoid shortages.</p>
+        <a href="#" class="btn">Check Attendance</a>
+      </div>
+      <div class="card">
+        <h3>🎭 Activities</h3>
+        <p>Record and celebrate your extracurricular achievements.</p>
+        <a href="#" class="btn">See Activities</a>
+      </div>
+      <div class="card">
+        <h3>📧 Smart Reports</h3>
+        <p>Parents get notified if overall performance is below 50%.</p>
+        <a href="#" class="btn">Generate Report</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Student Performance System | Designed with ❤️ by Nitin</p>
+  </footer>
+
+</body>
+</html>
