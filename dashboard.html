@@ -5,130 +5,92 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Student Dashboard</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --primary-color: #4A90E2;
-      --secondary-color: #8E2DE2;
-      --gradient: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-      --bg-light: #f5f6fa;
-      --text-dark: #333;
-      --card-bg: #fff;
-      --shadow: 0 5px 20px rgba(0,0,0,0.1);
-    }
-
-    * {
+    body {
+      font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    body {
-      background: var(--bg-light);
-      color: var(--text-dark);
+      background: #f2f2f2;
+      color: #333;
     }
 
     /* Navbar */
     .navbar {
-      background: var(--gradient);
-      padding: 1rem 3rem;
+      background: #4A90E2;
+      color: white;
+      padding: 10px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      color: white;
     }
-
     .navbar h1 {
-      font-size: 1.5rem;
-      font-weight: 700;
+      font-size: 20px;
     }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-    }
-
     .nav-links a {
       color: white;
       text-decoration: none;
-      font-weight: 500;
-      transition: opacity 0.3s ease;
-    }
-
-    .nav-links a:hover {
-      opacity: 0.7;
+      margin: 0 10px;
     }
 
     /* Dashboard */
     .dashboard {
-      padding: 2rem;
+      padding: 20px;
     }
-
     .dashboard h2 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 20px;
     }
 
-    /* Stats Cards */
+    /* Cards */
     .stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 2rem;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
     }
-
     .card {
-      background: var(--card-bg);
-      padding: 1.5rem;
-      border-radius: 15px;
-      box-shadow: var(--shadow);
-      transition: transform 0.3s ease;
+      background: white;
+      padding: 15px;
+      border: 1px solid #ccc;
+      flex: 1;
+      min-width: 180px;
       text-align: center;
     }
-
-    .card:hover { transform: translateY(-5px); }
-
     .card h3 {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-      color: var(--primary-color);
+      margin-bottom: 10px;
+      font-size: 16px;
+      color: #4A90E2;
     }
-
     .card p {
-      font-size: 1.4rem;
-      font-weight: 600;
+      font-size: 18px;
+      font-weight: bold;
     }
 
     /* Charts */
     .charts {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
     }
-
     .chart-card {
-      background: var(--card-bg);
-      padding: 1.5rem;
-      border-radius: 15px;
-      box-shadow: var(--shadow);
+      background: white;
+      padding: 15px;
+      border: 1px solid #ccc;
+      flex: 1;
+      min-width: 300px;
     }
-
     .chart-card h3 {
       text-align: center;
-      margin-bottom: 1rem;
-      color: var(--primary-color);
+      margin-bottom: 10px;
+      color: #4A90E2;
     }
 
     /* Footer */
     footer {
-      margin-top: 3rem;
+      background: #4A90E2;
+      color: white;
       text-align: center;
-      padding: 1rem;
-      background: var(--gradient);
-      color: #fff;
-      border-top-left-radius: 15px;
-      border-top-right-radius: 15px;
+      padding: 10px;
+      margin-top: 20px;
     }
   </style>
 </head>
@@ -169,13 +131,10 @@
 
     <!-- Charts Section -->
     <div class="charts">
-      <!-- Academic Performance -->
       <div class="chart-card">
         <h3>Academic Performance</h3>
         <canvas id="marksChart"></canvas>
       </div>
-
-      <!-- Activity Participation -->
       <div class="chart-card">
         <h3>Activity Participation</h3>
         <canvas id="activityChart"></canvas>
@@ -185,38 +144,27 @@
 
   <!-- Footer -->
   <footer>
-    <p>© 2025 Student Performance System | Designed with ❤️ by Nitin</p>
+    <p>© 2025 Student Performance System | Designed by Nitin</p>
   </footer>
 
   <!-- Chart.js Script -->
   <script>
     // Academic Performance Chart
-    const ctx1 = document.getElementById('marksChart');
-    new Chart(ctx1, {
+    new Chart(document.getElementById('marksChart'), {
       type: 'bar',
       data: {
         labels: ['Math', 'Physics', 'Chemistry', 'English', 'Computer'],
         datasets: [{
           label: 'Marks (%)',
           data: [78, 82, 75, 88, 90],
-          backgroundColor: [
-            '#4A90E2',
-            '#8E2DE2',
-            '#FF7F50',
-            '#3CB371',
-            '#FFD700'
-          ]
+          backgroundColor: ['#4A90E2','#8E2DE2','#FF7F50','#3CB371','#FFD700']
         }]
       },
-      options: {
-        responsive: true,
-        scales: { y: { beginAtZero: true, max: 100 } }
-      }
+      options: { scales: { y: { beginAtZero: true, max: 100 } } }
     });
 
     // Activity Participation Chart
-    const ctx2 = document.getElementById('activityChart');
-    new Chart(ctx2, {
+    new Chart(document.getElementById('activityChart'), {
       type: 'pie',
       data: {
         labels: ['Sports', 'Cultural', 'Technical', 'Volunteering'],
@@ -224,8 +172,7 @@
           data: [2, 1, 1, 1],
           backgroundColor: ['#4A90E2', '#8E2DE2', '#3CB371', '#FFD700']
         }]
-      },
-      options: { responsive: true }
+      }
     });
   </script>
 
