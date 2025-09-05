@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Results</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #4A90E2;
+      --secondary-color: #8E2DE2;
+      --gradient: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+      --bg-light: #f5f6fa;
+      --text-dark: #333;
+      --card-bg: #fff;
+      --shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body { background: var(--bg-light); color: var(--text-dark); }
+
+    /* Navbar */
+    .navbar {
+      background: var(--gradient);
+      padding: 1rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+    .navbar h1 { font-size: 1.5rem; font-weight: 700; }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: 0.3s; }
+    .nav-links a:hover { opacity: 0.7; }
+
+    /* Container */
+    .container { padding: 2rem; }
+    h2 { margin-bottom: 1rem; font-size: 1.8rem; color: var(--primary-color); }
+
+    /* Result Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card-bg);
+      box-shadow: var(--shadow);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+    th, td { padding: 1rem; text-align: center; border-bottom: 1px solid #ddd; }
+    th { background: var(--gradient); color: #fff; }
+    tr:nth-child(even) { background: #f9f9f9; }
+
+    /* Chart Card */
+    .chart-card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 15px;
+      box-shadow: var(--shadow);
+      max-width: 800px;
+      margin: auto;
+    }
+    .chart-card h3 { text-align: center; margin-bottom: 1rem; color: var(--primary-color); }
+
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      padding: 1rem;
+      background: var(--gradient);
+      color: #fff;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <h1>Student Performance</h1>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Dashboard</a>
+      <a href="#">Attendance</a>
+      <a href="#">Results</a>
+      <a href="#">Reports</a>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <div class="container">
+    <h2>My Academic Results</h2>
+    <table>
+      <tr>
+        <th>Subject</th>
+        <th>MTT-1 (20)</th>
+        <th>MTT-2 (20)</th>
+        <th>RTU Result (100)</th>
+      </tr>
+      <tr>
+        <td>Mathematics</td>
+        <td>16</td>
+        <td>18</td>
+        <td>78</td>
+      </tr>
+      <tr>
+        <td>Science</td>
+        <td>14</td>
+        <td>15</td>
+        <td>72</td>
+      </tr>
+      <tr>
+        <td>English</td>
+        <td>18</td>
+        <td>17</td>
+        <td>82</td>
+      </tr>
+      <tr>
+        <td>Computer</td>
+        <td>15</td>
+        <td>19</td>
+        <td>88</td>
+      </tr>
+    </table>
+
+    <div class="chart-card">
+      <h3>Performance Chart</h3>
+      <canvas id="resultChart"></canvas>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Student Performance System | Designed with ❤️ by Nitin</p>
+  </footer>
+
+  <!-- Chart.js Script -->
+  <script>
+    const ctx = document.getElementById('resultChart');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Mathematics', 'Science', 'English', 'Computer'],
+        datasets: [
+          {
+            label: 'MTT-1',
+            data: [16, 14, 18, 15],
+            backgroundColor: '#4A90E2',
+            borderRadius: 8
+          },
+          {
+            label: 'MTT-2',
+            data: [18, 15, 17, 19],
+            backgroundColor: '#8E2DE2',
+            borderRadius: 8
+          },
+          {
+            label: 'RTU Result',
+            data: [78, 72, 82, 88],
+            backgroundColor: '#2ecc71',
+            borderRadius: 8
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
