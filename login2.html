@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #00bcd4;
+            --secondary-color: #2196f3;
+            --bg-color: #121212;
+            --container-bg-color: #1e1e1e;
+            --text-color: #e0e0e0;
+            --placeholder-color: #777;
+            --border-color: #333;
+            --shadow-color: rgba(0, 0, 0, 0.5);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .login-container {
+            display: flex;
+            width: 90%;
+            max-width: 1000px;
+            background: var(--container-bg-color);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-in-out;
+            border: 1px solid #2a2a2a;
+        }
+
+        .login-photo-section {
+            flex: 1;
+            background-image: url('https://images.unsplash.com/photo-1542831371-29b0f74f945c?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .login-photo-section {
+                display: block;
+            }
+        }
+
+        .login-form-section {
+            flex: 1;
+            padding: 2.5rem 3rem; /* Adjusted padding to accommodate the logo */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .logo {
+            width: 100px; /* Adjust size as needed */
+            height: 100px; /* Adjust size as needed */
+            margin: 0 auto 1.5rem auto; /* Center the logo and add margin below it */
+            filter: drop-shadow(0 0 10px var(--primary-color)); /* Glow effect for dark theme */
+        }
+
+        .login-form-section h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .login-form-section p {
+            font-size: 1rem;
+            color: var(--placeholder-color);
+            margin-bottom: 2rem;
+        }
+
+        .user-type-tabs {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 2rem;
+            background: #2a2a2a;
+            border-radius: 10px;
+            padding: 4px;
+        }
+
+        .user-type-tab {
+            flex: 1;
+            padding: 0.6rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #999;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .user-type-tab.active {
+            background: var(--primary-color);
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 188, 212, 0.2);
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .input-icon {
+            position: absolute;
+            top: 50%;
+            left: 1rem;
+            transform: translateY(-50%);
+            color: var(--placeholder-color);
+            transition: color 0.3s ease;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 3rem;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 1rem;
+            color: var(--text-color);
+            background: #2a2a2a;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.3);
+        }
+
+        .input-group input:focus + .input-icon {
+            color: var(--primary-color);
+        }
+
+        .login-btn {
+            position: relative;
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            overflow: hidden;
+            z-index: 1;
+            transition: all 0.3s ease;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-btn::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(45deg);
+            transition: all 0.7s ease;
+            z-index: -1;
+        }
+
+        .login-btn:hover::before {
+            top: -50%;
+            left: -50%;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .message {
+            margin-top: 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: opacity 0.5s ease;
+        }
+
+        .success {
+            color: #4CAF50;
+        }
+
+        .error {
+            color: #F44336;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="login-photo-section"></div>
+        
+        <div class="login-form-section">
+            <img src="data:image/png;base64,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" alt="Student Performance Logo" class="logo">
+            <h2>Welcome Back!</h2>
+            <p>Log in to your account.</p>
+
+            <div class="user-type-tabs">
+                <span class="user-type-tab active" data-type="student">Student</span>
+                <span class="user-type-tab" data-type="parent">Parent</span>
+            </div>
+
+            <form id="login-form">
+                <div class="input-group">
+                    <i class="fas fa-user input-icon"></i>
+                    <input type="text" id="username" name="username" placeholder="Student ID" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock input-icon"></i>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="login-btn">Log In</button>
+            </form>
+
+            <div id="message" class="message"></div>
+        </div>
+    </div>
+
+    <script>
+        const studentTab = document.querySelector('[data-type="student"]');
+        const parentTab = document.querySelector('[data-type="parent"]');
+        const usernameInput = document.getElementById('username');
+        const form = document.getElementById('login-form');
+        const messageDiv = document.getElementById('message');
+        const userIcon = document.querySelector('.fa-user');
+
+        function switchUserType(userType) {
+            const isStudent = userType === 'student';
+            studentTab.classList.toggle('active', isStudent);
+            parentTab.classList.toggle('active', !isStudent);
+            usernameInput.placeholder = isStudent ? 'Student ID' : 'Parent Email';
+            userIcon.className = isStudent ? 'fas fa-user input-icon' : 'fas fa-envelope input-icon';
+        }
+
+        studentTab.addEventListener('click', () => switchUserType('student'));
+        parentTab.addEventListener('click', () => switchUserType('parent'));
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = usernameInput.value;
+            const password = document.getElementById('password').value;
+            const userType = studentTab.classList.contains('active') ? 'Student' : 'Parent';
+
+            if (username && password) {
+                showMessage(`Login successful! Welcome ${userType}.`, 'success');
+            } else {
+                showMessage('Please fill in both fields.', 'error');
+            }
+        });
+
+        function showMessage(text, type) {
+            messageDiv.textContent = text;
+            messageDiv.className = `message ${type}`;
+            messageDiv.style.opacity = '1';
+            setTimeout(() => {
+                messageDiv.style.opacity = '0';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
