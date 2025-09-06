@@ -150,14 +150,28 @@
   font-weight: 500;
 }
 
+/* Mobile Responsive Styles */
 @media (max-width: 768px) {
   .contact-container {
     padding: 1rem;
   }
 
+  .contact-container h2 {
+    font-size: 1.8rem;
+  }
+
+  .contact-container > p {
+    font-size: 1rem;
+  }
+
   .contact-content {
     flex-direction: column;
     gap: 2rem;
+  }
+
+  .contact-info h3,
+  .contact-form h3 {
+    font-size: 1.2rem;
   }
 
   .info-item {
@@ -167,5 +181,20 @@
   .info-item span {
     font-size: 1.2rem;
     margin-right: 0.75rem;
+  }
+
+  .info-item p {
+    font-size: 0.85rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .submit-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
   }
 }

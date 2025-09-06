@@ -32,3 +32,4 @@
 - [x] Verify data fetching from updated server (added more data)
 - [x] Test backend server with MongoDB data (login, dashboard, results, etc.)
 - [x] Test expanded student data (10 students + 10 parents) with various performance levels
+- [x] Test mobile responsiveness across all pages (added responsive CSS to all components)
