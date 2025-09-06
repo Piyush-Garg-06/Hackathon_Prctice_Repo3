@@ -34,7 +34,7 @@ const Dashboard = () => {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
     if (user && user.id) {
-      fetch(`http://localhost:5000/dashboard/${user.id}`)
+      fetch(`https://hackathon-prctice-repo3.onrender.com/dashboard/${user.id}`)
         .then(response => response.json())
         .then(data => {
           setData(data);

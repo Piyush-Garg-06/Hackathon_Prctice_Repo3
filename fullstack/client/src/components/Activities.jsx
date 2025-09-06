@@ -10,7 +10,7 @@ const Activities = () => {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
     if (user && user.id) {
-      fetch(`http://localhost:5000/activities/${user.id}`)
+      fetch(`https://hackathon-prctice-repo3.onrender.com/activities/${user.id}`)
         .then(response => response.json())
         .then(data => {
           setActivities(data.activities || []);

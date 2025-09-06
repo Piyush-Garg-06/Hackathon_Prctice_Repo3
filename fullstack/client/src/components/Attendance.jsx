@@ -15,7 +15,7 @@ export default function Attendance() {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
     if (user && user.id) {
-      fetch(`http://localhost:5000/attendance/${user.id}`)
+      fetch(`https://hackathon-prctice-repo3.onrender.com/attendance/${user.id}`)
         .then(response => response.json())
         .then(data => {
           setAttendanceData(data);
